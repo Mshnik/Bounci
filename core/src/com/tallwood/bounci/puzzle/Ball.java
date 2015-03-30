@@ -8,8 +8,8 @@ public class Ball {
 
 	public static Texture tex;
 	
-	final BTile start;
-	final BTile goal;
+	public final BTile start;
+	public final BTile goal;
 	private BTile current;
 	
 	private ArrayList<BTile> path;
@@ -31,14 +31,18 @@ public class Ball {
 		traveled = 0;
 	}
 	
+	public BTile getEndOfPath(){
+		return path.get(path.size() - 1);
+	}
+	
 	public boolean addTile(BTile t){
-		if(! path.get(path.size() - 1).isAdjacent(t)) return false;
+		if(t == null || ! getEndOfPath().isAdjacent(t)) return false;
 		path.add(t);
 		return true;
 	}
 	
 	public boolean isPathValid(){
-		return path.get(path.size() - 1).equals(goal);
+		return getEndOfPath().equals(goal);
 	}
 	
 	public BTile step(){

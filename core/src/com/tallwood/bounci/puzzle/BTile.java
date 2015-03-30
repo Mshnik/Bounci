@@ -9,9 +9,19 @@ import common.types.Tuple2;
 public class BTile extends Tuple2<Integer, Integer> implements Tile2D {
 
 	public static Texture tex;
+	public final Board board;
 	
-	public BTile(Integer first, Integer second) {
+	public boolean needsLocUpdate;
+	public float graphX;
+	public float graphY;
+	public float width;
+	public float height;
+	
+	
+	public BTile(Board b, Integer first, Integer second) {
 		super(first, second);
+		this.board = b;
+		needsLocUpdate = true;
 	}
 	
 	public int getX(){
@@ -48,6 +58,10 @@ public class BTile extends Tuple2<Integer, Integer> implements Tile2D {
 		int diffY = Math.abs(getY() - other.getY());
 		
 		return diffX == 1 && diffY == 0 || diffY == 1 && diffX == 0;
+	}
+	
+	public boolean containsPoint(int x, int y){
+		return x >= graphX && y >= graphY && x <= graphX + width && y <= graphY + height;
 	}
 	
 }

@@ -12,11 +12,13 @@ import com.tallwood.bounci.puzzle.Puzzle;
 public class BounciGame implements Screen {
 	BounciCanvas canvas;
 	Puzzle p;
+	MouseController m;
 	
 	public BounciGame(){
 		System.out.println("Created");
 
 		canvas = new BounciCanvas();
+		m = new MouseController();
 		BTile.tex = new Texture("tile/Tile.png");
 		Ball.tex = new Texture("ball/ball.png");
 		
@@ -24,7 +26,7 @@ public class BounciGame implements Screen {
 		for(int i = 0; i < 5; i++){
 			for(int c = 0; c < 10; c++){
 				if(i * c != 6)
-					b.add(new BTile(i,c));
+					b.add(new BTile(b, i,c));
 			}
 		}
 		

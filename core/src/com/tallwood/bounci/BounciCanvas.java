@@ -31,10 +31,14 @@ public class BounciCanvas {
 		float tileHeight = Gdx.graphics.getHeight() / b.getHeight();
 
 		for(BTile t : b){
-			batch.draw(BTile.tex, 
-					tileWidth * t.getX() + tileWidth * TILE_MARGIN, 
-					tileHeight * t.getY() + tileHeight * TILE_MARGIN, 
-					tileWidth * (1 - TILE_MARGIN * 2), tileHeight * (1 - TILE_MARGIN * 2));
+			if(t.needsLocUpdate){
+				t.graphX = tileWidth * t.getX() + tileWidth * TILE_MARGIN;
+				t.graphY = tileHeight * t.getY() + tileHeight * TILE_MARGIN;
+				t.width = tileWidth * (1 - TILE_MARGIN * 2);
+				t.height = tileHeight * (1 - TILE_MARGIN * 2);
+				t.needsLocUpdate = false;
+			}
+			batch.draw(BTile.tex, t.graphX, t.graphY, t.width, t.height);
 		}		
 		batch.end();
 		active = false;
