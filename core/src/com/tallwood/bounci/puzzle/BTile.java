@@ -35,6 +35,19 @@ public class BTile extends Tuple2<Integer, Integer> implements Tile2D {
 		return new Integer[]{_1, _2};
 	}
 
+	public void reset(){
+		
+	}
 	
+	public void step(){
+		
+	}
+	
+	public boolean isAdjacent(BTile other){
+		int diffX = Math.abs(getX() - other.getX());
+		int diffY = Math.abs(getY() - other.getY());
+		
+		return diffX == 1 && diffY == 0 || diffY == 1 && diffX == 0;
+	}
 	
 }
